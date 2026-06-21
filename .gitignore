@@ -1,0 +1,12 @@
+# Environment
+.env
+venv/
+
+# Model outputs (too large for git)
+outputs/
+data/processed/
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
