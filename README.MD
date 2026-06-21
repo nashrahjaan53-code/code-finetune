@@ -119,8 +119,8 @@ WANDB_API_KEY=your_wandb_key_here
 6.4 Final check — your complete file tree
 
 code-finetune/
-├── .env                  ← secret (gitignored)
-├── .env.example          ←  safe to commit
+├── .env                  
+├── .env.example         
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
