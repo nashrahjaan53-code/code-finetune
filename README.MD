@@ -1,6 +1,13 @@
 #  Code Generation Assistant — LLM Fine-Tuning with QLoRA
 
-Fine-tuning **Mistral-7B** on **CodeAlpaca-20k** using QLoRA (4-bit quantization + LoRA adapters) to build a domain-specific code generation assistant.
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?style=for-the-badge&logo=pytorch)
+![HuggingFace](https://img.shields.io/badge/HuggingFace-Transformers-yellow?style=for-the-badge&logo=huggingface)
+![PEFT](https://img.shields.io/badge/PEFT-QLoRA-green?style=for-the-badge)
+![WandB](https://img.shields.io/badge/Weights_&_Biases-Tracking-orange?style=for-the-badge&logo=weightsandbiases)
+![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
+
+> Fine-tuning **Mistral-7B** on **CodeAlpaca-20k** using QLoRA (4-bit quantization + LoRA adapters) to build a domain-specific code generation assistant.
 
 ---
 
@@ -29,6 +36,7 @@ code-finetune/
 ├── .env.example                  # Safe template to commit
 ├── .gitignore
 ├── requirements.txt
+├── run.py                        #  Run entire pipeline at once
 ├── README.md
 ├── configs/
 │   └── qlora_config.yaml         # All hyperparameters
@@ -81,31 +89,50 @@ cp .env.example .env
 
 ---
 
-##  Usage
+## Run Entire Pipeline at Once
+
+```bash
+python run.py
+```
+
+This single command runs all steps in order:
+1. ✅ Prepares data
+2. ✅ Trains the model
+3. ✅ Evaluates results
+4. ✅ Launches inference chat
+
+Or run steps individually:
+
+```bash
+python run.py --step data        # Only prepare data
+python run.py --step train       # Only train
+python run.py --step evaluate    # Only evaluate
+python run.py --step inference   # Only chat
+```
+
+---
+
+## 🚀 Usage (Manual)
 
 ### Step 1 — Prepare Data
 ```bash
 python src/prepare_data.py
 ```
-Downloads CodeAlpaca-20k and formats into instruction-tuning format.
 
 ### Step 2 — Train
 ```bash
 python src/train.py
 ```
-Fine-tunes Mistral-7B with QLoRA. Takes ~2-3 hrs on a T4 GPU.
 
 ### Step 3 — Chat with your model
 ```bash
 python src/inference.py
 ```
-Interactive CLI to test your fine-tuned model.
 
 ### Step 4 — Evaluate
 ```bash
 python src/evaluate.py
 ```
-Runs BLEU, CodeBLEU, and Pass@1 metrics on 100 validation samples.
 
 ---
 
@@ -119,7 +146,7 @@ Runs BLEU, CodeBLEU, and Pass@1 metrics on 100 validation samples.
 
 ---
 
-##  Key Concepts
+## Key Concepts
 
 | Concept | What it does |
 |---------|-------------|
@@ -131,7 +158,7 @@ Runs BLEU, CodeBLEU, and Pass@1 metrics on 100 validation samples.
 
 ---
 
-##  Tech Stack
+## 🛠️ Tech Stack
 
 | Tool | Purpose |
 |------|---------|
@@ -147,7 +174,7 @@ Runs BLEU, CodeBLEU, and Pass@1 metrics on 100 validation samples.
 
 ---
 
-##  Configuration
+## 🔧 Configuration
 
 All hyperparameters live in `configs/qlora_config.yaml`:
 
@@ -168,8 +195,7 @@ training:
 
 ---
 
-## Ways to Extend
-
+##  Ways to Exten
 - Swap dataset → fine-tune on your **own codebase**
 - Try **DPO** (Direct Preference Optimization) for better output quality
 - Build a **Gradio UI** on top of `inference.py`
@@ -178,6 +204,6 @@ training:
 
 ---
 
-## 📝 License
-MIT
+##  License
 
+MIT
