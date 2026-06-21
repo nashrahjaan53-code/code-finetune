@@ -92,7 +92,7 @@ python src/evaluate.py
 | CodeBLEU | 44.7% |
 | Pass@1 | 61.0% |
 
-## 🧠 Key Concepts
+## Key Concepts
 
 | Concept | What it does |
 |---------|-------------|
@@ -102,7 +102,7 @@ python src/evaluate.py
 | **CodeBLEU** | Code-aware metric (syntax + data flow aware) |
 | **Pass@1** | Checks if generated code actually executes |
 
-## 🛠️ Tech Stack
+## Tech Stack
 - `transformers` — model loading & training
 - `peft` — LoRA adapters
 - `bitsandbytes` — 4-bit quantization
@@ -110,7 +110,7 @@ python src/evaluate.py
 - `datasets` — data pipeline
 - `wandb` — experiment tracking
 
-## 📝 License
+##  License
 MIT
 6.3 Create .env.example (safe to commit — no real keys)
 
