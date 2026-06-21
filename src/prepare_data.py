@@ -2,11 +2,11 @@ from datasets import load_dataset
 import json
 import os
 
-# ── Load CodeAlpaca-20k from HuggingFace ──────────────────────────────────────
+
 def load_raw_data():
-    print("📥 Loading CodeAlpaca-20k dataset...")
+    print(" Loading CodeAlpaca-20k dataset...")
     dataset = load_dataset("sahil2801/CodeAlpaca-20k", split="train")
-    print(f"✅ Loaded {len(dataset)} samples")
+    print(f" Loaded {len(dataset)} samples")
     return dataset
 
 # ── Format into Alpaca-style instruction prompt ───────────────────────────────
