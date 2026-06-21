@@ -3,7 +3,6 @@ import subprocess
 import sys
 import time
 
-
 GREEN  = "\033[92m"
 BLUE   = "\033[94m"
 YELLOW = "\033[93m"
@@ -15,15 +14,15 @@ def banner():
     print(f"""
 {BLUE}{BOLD}
 ╔══════════════════════════════════════════════════╗
-║   🤖 Code Generation Assistant — QLoRA Pipeline  ║
-║      Mistral-7B × CodeAlpaca-20k                 ║
+║   Code Generation Assistant -- QLoRA Pipeline    ║
+║      Mistral-7B x CodeAlpaca-20k                 ║
 ╚══════════════════════════════════════════════════╝
 {RESET}""")
 
-def run_step(name, script_path, emoji):
-    print(f"\n{YELLOW}{BOLD}{emoji}  Starting: {name}{RESET}")
+def run_step(name, script_path):
+    print(f"\n{YELLOW}{BOLD}>> Starting: {name}{RESET}")
     print(f"{BLUE}{'─' * 50}{RESET}")
-    
+
     start = time.time()
     result = subprocess.run(
         [sys.executable, script_path],
@@ -32,18 +31,18 @@ def run_step(name, script_path, emoji):
     elapsed = round(time.time() - start, 1)
 
     if result.returncode == 0:
-        print(f"\n{GREEN}{BOLD}✅ {name} completed in {elapsed}s{RESET}")
+        print(f"\n{GREEN}{BOLD}[DONE] {name} completed in {elapsed}s{RESET}")
         return True
     else:
-        print(f"\n{RED}{BOLD}❌ {name} failed! Check errors above.{RESET}")
+        print(f"\n{RED}{BOLD}[FAILED] {name} failed! Check errors above.{RESET}")
         return False
 
 def run_all():
     steps = [
-        ("Data Preparation",  "src/prepare_data.py"),
-        ("Model Training",    "src/train.py"),
-        ("Evaluation",        "src/evaluate.py"),
-        ("Inference Chat",    "src/inference.py"),
+        ("Data Preparation", "src/prepare_data.py"),
+        ("Model Training",   "src/train.py"),
+        ("Evaluation",       "src/evaluate.py"),
+        ("Inference Chat",   "src/inference.py"),
     ]
 
     banner()
@@ -59,13 +58,12 @@ def run_all():
             print(f"\n{RED}Pipeline stopped due to failure in: {name}{RESET}")
             break
 
-
     print(f"\n{BLUE}{BOLD}{'═' * 50}")
-    print(f"   PIPELINE SUMMARY")
+    print(f"  PIPELINE SUMMARY")
     print(f"{'═' * 50}{RESET}")
     for name, success in results.items():
-        icon = f"{GREEN}✅" if success else f"{RED}❌"
-        print(f"  {icon}  {name}{RESET}")
+        status = f"{GREEN}[PASS]" if success else f"{RED}[FAIL]"
+        print(f"  {status}  {name}{RESET}")
     print(f"{BLUE}{'═' * 50}{RESET}\n")
 
 def run_single(step):
@@ -78,11 +76,11 @@ def run_single(step):
     }
 
     if step not in steps:
-        print(f"{RED} Unknown step '{step}'. Choose from: data, train, evaluate, inference{RESET}")
+        print(f"{RED}❌ Unknown step '{step}'. Choose from: data, train, evaluate, inference{RESET}")
         sys.exit(1)
 
-    name, script, emoji = steps[step]
-    run_step(name, script, emoji)
+    name, script = steps[step]
+    run_step(name, script)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="QLoRA Fine-Tuning Pipeline Runner")
