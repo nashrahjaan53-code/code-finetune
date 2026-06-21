@@ -1,4 +1,4 @@
-# 🤖 Code Generation Assistant — LLM Fine-Tuning with QLoRA
+#  Code Generation Assistant — LLM Fine-Tuning with QLoRA
 
 Fine-tuning **Mistral-7B** on **CodeAlpaca-20k** using QLoRA (4-bit quantization + LoRA adapters) to build a domain-specific code generation assistant.
 
@@ -131,7 +131,7 @@ Runs BLEU, CodeBLEU, and Pass@1 metrics on 100 validation samples.
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Tool | Purpose |
 |------|---------|
