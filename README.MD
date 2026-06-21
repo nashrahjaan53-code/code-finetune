@@ -179,4 +179,5 @@ training:
 ---
 
 ## 📝 License
+MIT
 
