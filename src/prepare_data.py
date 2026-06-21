@@ -9,12 +9,9 @@ def load_raw_data():
     print(f" Loaded {len(dataset)} samples")
     return dataset
 
-# ── Format into Alpaca-style instruction prompt ───────────────────────────────
+
 def format_prompt(sample):
-    """
-    Converts raw sample into instruction-tuning format.
-    CodeAlpaca has: instruction, input, output
-    """
+  
     if sample["input"]:
         prompt = f"""### Instruction:
 {sample["instruction"]}
@@ -33,14 +30,13 @@ def format_prompt(sample):
     
     return {"text": prompt}
 
-# ── Split & Save ──────────────────────────────────────────────────────────────
 def prepare_and_save(output_dir="data/processed"):
     os.makedirs(output_dir, exist_ok=True)
     
     dataset = load_raw_data()
     
-    # Format all samples
-    print("🔄 Formatting prompts...")
+  
+    print(" Formatting prompts...")
     formatted = dataset.map(format_prompt, remove_columns=dataset.column_names)
     
     # Train / Val split (95/5)
