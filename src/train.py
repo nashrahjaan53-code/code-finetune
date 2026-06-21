@@ -65,7 +65,6 @@ def apply_lora(model, lora_cfg):
     model.print_trainable_parameters()  # shows how few params we're actually training!
     return model
 
-# ── Load Dataset ──────────────────────────────────────────────────────────────
 def load_data():
     print(" Loading processed dataset...")
     train = load_dataset("json", data_files="data/processed/train.json", split="train")
@@ -73,7 +72,6 @@ def load_data():
     print(f"Train: {len(train)} | Val: {len(val)}")
     return train, val
 
-# ── Main Training Loop ────────────────────────────────────────────────────────
 def train():
     cfg = load_config()
     
@@ -120,7 +118,7 @@ def train():
     print("\n Starting training...\n")
     trainer.train()
     
-    # ── Save final adapter weights ─────────────────────────────────────────────
+    
     save_path = f"{t['output_dir']}/final-adapter"
     trainer.model.save_pretrained(save_path)
     tokenizer.save_pretrained(save_path)
