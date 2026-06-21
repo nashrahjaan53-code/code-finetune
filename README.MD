@@ -3,7 +3,7 @@
 Fine-tuning **Mistral-7B** on **CodeAlpaca-20k** using QLoRA (4-bit quantization + 
 LoRA adapters) to build a domain-specific code generation assistant.
 
-## 🏗️ Architecture
+##  Architecture
 Base Model (Mistral-7B)
 │
 ▼
@@ -17,7 +17,7 @@ Fine-tuned Code Assistant
 
 
 
-## 📁 Project Structure
+##  Project Structure
 code-finetune/
 ├── .env # API keys (never commit)
 ├── .gitignore
@@ -62,7 +62,7 @@ cp .env.example .env
 # fill in WANDB_API_KEY in .env
 ```
 
-## 🚀 Usage
+##  Usage
 
 ### Step 1 — Prepare Data
 ```bash
@@ -84,7 +84,7 @@ python src/inference.py
 python src/evaluate.py
 ```
 
-## 📊 Results
+##  Results
 
 | Metric | Score |
 |--------|-------|
