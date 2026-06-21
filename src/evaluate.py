@@ -18,9 +18,9 @@ RESULTS_PATH = "data/eval_results.json"
 NUM_SAMPLES  = 100          # evaluate on 100 val samples (fast)
 MAX_NEW_TOKENS = 256
 
-# ── Load model ────────────────────────────────────────────────────────────────
+
 def load_model():
-    print("🤖 Loading fine-tuned model...")
+    print(" Loading fine-tuned model...")
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     tokenizer.pad_token = tokenizer.eos_token
 
@@ -33,13 +33,12 @@ def load_model():
     model.eval()
     return model, tokenizer
 
-# ── Build prompt (same as training & inference) ───────────────────────────────
+
 def build_prompt(sample):
     if sample.get("input", ""):
         return f"""### Instruction:\n{sample['instruction']}\n\n### Input:\n{sample['input']}\n\n### Response:\n"""
     return f"""### Instruction:\n{sample['instruction']}\n\n### Response:\n"""
 
-# ── Generate prediction for one sample ───────────────────────────────────────
 def generate_one(model, tokenizer, prompt):
     inputs = tokenizer(prompt, return_tensors="pt").to(model.device)
     with torch.no_grad():
@@ -58,17 +57,16 @@ def generate_one(model, tokenizer, prompt):
     )
     return response.strip()
 
-# ── BLEU Score ────────────────────────────────────────────────────────────────
+
 def compute_bleu(predictions, references):
     bleu = load("bleu")
-    # BLEU expects list of strings for predictions, list of list of strings for references
     result = bleu.compute(
         predictions=predictions,
         references=[[ref] for ref in references]
     )
     return round(result["bleu"] * 100, 2)
 
-# ── CodeBLEU Score ────────────────────────────────────────────────────────────
+
 def compute_codebleu(predictions, references):
     result = calc_codebleu(
         references=[[ref] for ref in references],
@@ -78,7 +76,7 @@ def compute_codebleu(predictions, references):
     )
     return round(result["codebleu"] * 100, 2)
 
-# ── Pass@1 — tries to exec the generated code ─────────────────────────────────
+
 def compute_pass_at_1(predictions):
     passed = 0
     errors = []
@@ -93,7 +91,6 @@ def compute_pass_at_1(predictions):
     pass_at_1 = round((passed / len(predictions)) * 100, 2)
     return pass_at_1, errors
 
-# ── Main Eval Loop ────────────────────────────────────────────────────────────
 def evaluate():
     # load val set
     val_ds = load_dataset(
