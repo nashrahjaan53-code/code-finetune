@@ -112,7 +112,7 @@ python run.py --step inference   # Only chat
 
 ---
 
-## 🚀 Usage (Manual)
+## Usage (Manual)
 
 ### Step 1 — Prepare Data
 ```bash
@@ -158,7 +158,7 @@ python src/evaluate.py
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Tool | Purpose |
 |------|---------|
@@ -174,7 +174,7 @@ python src/evaluate.py
 
 ---
 
-## 🔧 Configuration
+##  Configuration
 
 All hyperparameters live in `configs/qlora_config.yaml`:
 
