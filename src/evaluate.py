@@ -7,12 +7,17 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 from evaluate import load
 from codebleu import calc_codebleu
-import nltk
+import yaml
 nltk.download("punkt", quiet=True)
 
 load_dotenv()
 
-BASE_MODEL   = "mistralai/Mistral-7B-v0.1"
+def load_config(path="configs/qlora_config.yaml"):
+    with open(path) as f:
+        return yaml.safe_load(f)
+
+cfg = load_config()
+BASE_MODEL   = cfg["model_name"]
 ADAPTER_PATH = "outputs/codellama-qlora/final-adapter"
 RESULTS_PATH = "data/eval_results.json"
 NUM_SAMPLES  = 100          # evaluate on 100 val samples (fast)
@@ -24,9 +29,10 @@ def load_model():
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     tokenizer.pad_token = tokenizer.eos_token
 
+    dtype = torch.float16 if torch.cuda.is_available() else torch.float32
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
-        torch_dtype=torch.float16,
+        torch_dtype=dtype,
         device_map="auto",
     )
     model = PeftModel.from_pretrained(model, ADAPTER_PATH)

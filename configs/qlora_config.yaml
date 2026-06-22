@@ -1,4 +1,4 @@
-model_name: "mistralai/Mistral-7B-v0.1"
+model_name: "Qwen/Qwen2.5-0.5B-Instruct"
 
 bnb_config:
   load_in_4bit: true

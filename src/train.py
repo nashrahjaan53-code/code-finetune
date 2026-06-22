@@ -25,31 +25,38 @@ def load_tokenizer(model_name):
     tokenizer.padding_side = "right"
     return tokenizer
 
-def load_model(model_name, bnb_cfg):
-    print(f" Loading model in 4-bit: {model_name}")
-    
-    bnb_config = BitsAndBytesConfig(
-        load_in_4bit=bnb_cfg["load_in_4bit"],
-        bnb_4bit_quant_type=bnb_cfg["bnb_4bit_quant_type"],
-        bnb_4bit_compute_dtype=torch.float16,
-        bnb_4bit_use_double_quant=bnb_cfg["bnb_4bit_use_double_quant"],
-    )
-    
-    model = AutoModelForCausalLM.from_pretrained(
-        model_name,
-        quantization_config=bnb_config,
-        device_map="auto",               # auto places layers across GPU/CPU
-        trust_remote_code=True,
-    )
+def load_model(model_name, bnb_cfg, use_quantization=True):
+    if use_quantization:
+        print(f" Loading model in 4-bit: {model_name}")
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=bnb_cfg["load_in_4bit"],
+            bnb_4bit_quant_type=bnb_cfg["bnb_4bit_quant_type"],
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_use_double_quant=bnb_cfg["bnb_4bit_use_double_quant"],
+        )
+        model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            quantization_config=bnb_config,
+            device_map="auto",               # auto places layers across GPU/CPU
+            trust_remote_code=True,
+        )
+    else:
+        print(f" Loading model in standard precision (no quantization): {model_name}")
+        model = AutoModelForCausalLM.from_pretrained(
+            model_name,
+            device_map="auto",               # auto places layers across GPU/CPU
+            trust_remote_code=True,
+        )
     model.config.use_cache = False       # disable KV cache during training
     model.config.pretraining_tp = 1
     return model
 
 
-def apply_lora(model, lora_cfg):
+def apply_lora(model, lora_cfg, use_quantization=True):
     print("Applying LoRA adapters...")
     
-    model = prepare_model_for_kbit_training(model)  # prepares 4-bit model for training
+    if use_quantization:
+        model = prepare_model_for_kbit_training(model)  # prepares 4-bit model for training
     
     lora_config = LoraConfig(
         r=lora_cfg["r"],
@@ -79,11 +86,22 @@ def train():
     
     model_name  = cfg["model_name"]
     tokenizer   = load_tokenizer(model_name)
-    model       = load_model(model_name, cfg["bnb_config"])
-    model       = apply_lora(model, cfg["lora_config"])
+    
+    has_cuda = torch.cuda.is_available()
+    use_quant = cfg["bnb_config"]["load_in_4bit"] and has_cuda
+    
+    if not has_cuda:
+        print("\n[WARNING] NVIDIA GPU/CUDA not detected. Falling back to CPU mode:")
+        print("  - Disabling 4-bit bitsandbytes quantization")
+        print("  - Disabling float16 precision (using float32)\n")
+
+    model       = load_model(model_name, cfg["bnb_config"], use_quantization=use_quant)
+    model       = apply_lora(model, cfg["lora_config"], use_quantization=use_quant)
     train_ds, val_ds = load_data()
     
     t = cfg["training"]
+    
+    fp16_val = t["fp16"] if has_cuda else False
     
     training_args = TrainingArguments(
         output_dir=t["output_dir"],
@@ -93,7 +111,8 @@ def train():
         learning_rate=t["learning_rate"],
         warmup_ratio=t["warmup_ratio"],
         lr_scheduler_type=t["lr_scheduler_type"],
-        fp16=t["fp16"],
+        fp16=fp16_val,
+        use_cpu=not has_cuda,
         logging_steps=t["logging_steps"],
         save_steps=t["save_steps"],
         eval_steps=t["eval_steps"],
