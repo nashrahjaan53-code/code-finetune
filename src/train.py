@@ -89,16 +89,15 @@ def train():
     use_cpu=True,
 )
 
-    trainer = SFTTrainer(
-        model=model,
-        train_dataset=train_ds,
-        eval_dataset=val_ds,
-        tokenizer=tokenizer,
-        args=training_args,
-        dataset_text_field="text",
-        max_seq_length=t["max_seq_length"],
-        packing=False,
-    )
+   trainer = SFTTrainer(
+    model=model,
+    train_dataset=train_ds,
+    eval_dataset=val_ds,
+    tokenizer=tokenizer,
+    args=training_args,
+    dataset_text_field="text",
+    max_seq_length=t["max_seq_length"],
+)
 
     print("\nStarting training...\n")
     trainer.train()

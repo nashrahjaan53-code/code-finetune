@@ -1,0 +1,24 @@
+Loading tokenizer: Qwen/Qwen2.5-0.5B-Instruct
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading model: Qwen/Qwen2.5-0.5B-Instruct
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 290/290 [00:21<00:00, 13.30it/s]
+Applying LoRA adapters...
+C:\Users\malik\code-finetune\venv\Lib\site-packages\bitsandbytes\cextension.py:31: UserWarning: The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers, 8-bit multiplication, and GPU quantization are unavailable.
+  warn("The installed version of bitsandbytes was compiled without GPU support. "
+function 'cadam32bit_grad_fp32' not found
+trainable params: 1,081,344 || all params: 495,114,112 || trainable%: 0.21840298504761665
+Loading processed dataset...
+Train: 19020 | Val: 1002
+[transformers] warmup_ratio is deprecated and will be removed in v5.2. Use `warmup_steps` instead.
+Map: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 19020/19020 [00:07<00:00, 2601.32 examples/s]
+Map: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████| 1002/1002 [00:00<00:00, 4303.38 examples/s]
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 113, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 92, in train
+    trainer = SFTTrainer(
+              ^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\trl\trainer\sft_trainer.py", line 322, in __init__
+    super().__init__(
+TypeError: Trainer.__init__() got an unexpected keyword argument 'tokenizer'
