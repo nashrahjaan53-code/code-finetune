@@ -3,6 +3,12 @@ import subprocess
 import sys
 import time
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding='utf-8')
+    except AttributeError:
+        pass
+
 GREEN  = "\033[92m"
 BLUE   = "\033[94m"
 YELLOW = "\033[93m"
@@ -23,9 +29,14 @@ def run_step(name, script_path):
     print(f"\n{YELLOW}{BOLD}>> Starting: {name}{RESET}")
     print(f"{BLUE}{'─' * 50}{RESET}")
 
+    import os
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+
     start = time.time()
     result = subprocess.run(
         [sys.executable, script_path],
+        env=env,
         check=False
     )
     elapsed = round(time.time() - start, 1)
