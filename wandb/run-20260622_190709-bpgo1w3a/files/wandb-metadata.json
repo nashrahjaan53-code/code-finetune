@@ -1,0 +1,28 @@
+{
+  "os": "Windows-10-10.0.26200-SP0",
+  "python": "CPython 3.11.9",
+  "startedAt": "2026-06-22T13:37:09.976202Z",
+  "program": "C:\\Users\\malik\\code-finetune\\src\\train.py",
+  "codePath": "src\\train.py",
+  "codePathLocal": "src\\train.py",
+  "git": {
+    "remote": "https://github.com/nashrahjaan53-code/code-finetune.git",
+    "commit": "61b03f0985cdb204babfcca68ca1b75830f62279"
+  },
+  "email": "nashrahjaan53@gmail.com",
+  "root": "C:\\Users\\malik\\code-finetune",
+  "host": "lenovo",
+  "executable": "C:\\Users\\malik\\code-finetune\\venv\\Scripts\\python.exe",
+  "cpu_count": 6,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "308302311424",
+      "used": "286677213184"
+    }
+  },
+  "memory": {
+    "total": "8301043712"
+  },
+  "writerId": "tlbtuzbkhdbuwnsvoc4ojc2g820dx1g8"
+}

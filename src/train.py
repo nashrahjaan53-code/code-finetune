@@ -53,8 +53,8 @@ def apply_lora(model, lora_cfg):
 
 def load_data():
     print("Loading processed dataset...")
-    train = load_dataset("json", data_files="data/processed/train.json", split="train")
-    val   = load_dataset("json", data_files="data/processed/val.json",   split="train")
+    train = load_dataset("json", data_files="data/processed/train.jsonl", split="train")
+    val   = load_dataset("json", data_files="data/processed/val.jsonl",   split="train")
     print(f"Train: {len(train)} | Val: {len(val)}")
     return train, val
 
