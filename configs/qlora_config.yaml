@@ -1,14 +1,12 @@
-# ── Model ─────────────────────────────────────────────────────────────────────
 model_name: "mistralai/Mistral-7B-v0.1"
 
-# ── QLoRA (4-bit quantization) ────────────────────────────────────────────────
 bnb_config:
   load_in_4bit: true
   bnb_4bit_quant_type: "nf4"
   bnb_4bit_compute_dtype: "float16"
   bnb_4bit_use_double_quant: true
 
-# ── LoRA Adapter ──────────────────────────────────────────────────────────────
+
 lora_config:
   r: 64
   lora_alpha: 16
@@ -21,7 +19,7 @@ lora_config:
     - "k_proj"
     - "o_proj"
 
-# ── Training ──────────────────────────────────────────────────────────────────
+
 training:
   output_dir: "outputs/mistral-qlora"
   num_train_epochs: 3
