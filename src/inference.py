@@ -29,7 +29,6 @@ def load_finetuned_model():
     print(" Model ready!\n")
     return model, tokenizer
 
-# ── Format prompt (same format as training) ───────────────────────────────────
 def build_prompt(instruction, input_text=""):
     if input_text:
         return f"""### Instruction:
@@ -46,7 +45,7 @@ def build_prompt(instruction, input_text=""):
 ### Response:
 """
 
-# ── Generate response ─────────────────────────────────────────────────────────
+
 def generate(model, tokenizer, instruction, input_text=""):
     prompt = build_prompt(instruction, input_text)
 
@@ -64,7 +63,6 @@ def generate(model, tokenizer, instruction, input_text=""):
             pad_token_id=tokenizer.eos_token_id,
         )
 
-    # decode only the newly generated tokens (not the prompt)
     response = tokenizer.decode(
         outputs[0][inputs["input_ids"].shape[1]:],
         skip_special_tokens=True
