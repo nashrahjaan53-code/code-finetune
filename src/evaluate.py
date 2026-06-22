@@ -104,7 +104,7 @@ def evaluate():
     predictions = []
     references  = []
 
-    print(f"\n📊 Evaluating on {NUM_SAMPLES} samples...\n")
+    print(f"\n Evaluating on {NUM_SAMPLES} samples...\n")
 
     for i, sample in enumerate(val_ds):
         # rebuild original sample structure from formatted text
@@ -120,10 +120,9 @@ def evaluate():
         references.append(ref)
 
         if (i + 1) % 10 == 0:
-            print(f"  ✅ {i+1}/{NUM_SAMPLES} done...")
+            print(f"   {i+1}/{NUM_SAMPLES} done...")
 
-    # ── Compute all metrics ───────────────────────────────────────────────────
-    print("\n🔢 Computing metrics...")
+    print("\n Computing metrics...")
 
     bleu      = compute_bleu(predictions, references)
     codebleu  = compute_codebleu(predictions, references)
@@ -138,7 +137,7 @@ def evaluate():
         "error_samples": errors[:5],   # save first 5 errors for inspection
     }
 
-    # ── Print summary ─────────────────────────────────────────────────────────
+
     print("\n" + "─" * 40)
     print("📈 EVALUATION RESULTS")
     print("─" * 40)
@@ -148,7 +147,7 @@ def evaluate():
     print(f"  Errors     : {len(errors)}/{NUM_SAMPLES}")
     print("─" * 40)
 
-    # ── Save results ──────────────────────────────────────────────────────────
+
     os.makedirs("data", exist_ok=True)
     with open(RESULTS_PATH, "w") as f:
         json.dump(results, f, indent=2)
