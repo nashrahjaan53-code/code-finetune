@@ -6,14 +6,13 @@ from peft import PeftModel
 
 load_dotenv()
 
-# ── Config ────────────────────────────────────────────────────────────────────
+
 BASE_MODEL    = "mistralai/Mistral-7B-v0.1"
 ADAPTER_PATH  = "outputs/codellama-qlora/final-adapter"
 MAX_NEW_TOKENS = 512
 
-# ── Load base model + LoRA adapter ───────────────────────────────────────────
 def load_finetuned_model():
-    print("🤖 Loading base model...")
+    print(" Loading base model...")
     tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL)
     tokenizer.pad_token = tokenizer.eos_token
 
@@ -23,11 +22,11 @@ def load_finetuned_model():
         device_map="auto",
     )
 
-    print("🔧 Loading LoRA adapter...")
+    print(" Loading LoRA adapter...")
     model = PeftModel.from_pretrained(model, ADAPTER_PATH)
     model.eval()   # inference mode
 
-    print("✅ Model ready!\n")
+    print(" Model ready!\n")
     return model, tokenizer
 
 # ── Format prompt (same format as training) ───────────────────────────────────
@@ -76,18 +75,18 @@ def generate(model, tokenizer, instruction, input_text=""):
 def chat():
     model, tokenizer = load_finetuned_model()
 
-    print("💬 Code Assistant Ready — type 'exit' to quit\n")
+    print(" Code Assistant Ready — type 'exit' to quit\n")
     print("─" * 50)
 
     while True:
-        instruction = input("\n📝 Instruction: ").strip()
+        instruction = input("\n Instruction: ").strip()
         if instruction.lower() == "exit":
-            print("👋 Bye!")
+            print(" Bye!")
             break
 
-        input_text = input("📎 Input (optional, press Enter to skip): ").strip()
+        input_text = input(" Input (optional, press Enter to skip): ").strip()
 
-        print("\n⚙️  Generating...\n")
+        print("\n  Generating...\n")
         response = generate(model, tokenizer, instruction, input_text)
 
         print("─" * 50)
