@@ -25,29 +25,16 @@ def load_tokenizer(model_name):
     tokenizer.padding_side = "right"
     return tokenizer
 
-def load_model(model_name, bnb_cfg, use_quantization=True):
-    if use_quantization:
-        print(f" Loading model in 4-bit: {model_name}")
-        bnb_config = BitsAndBytesConfig(
-            load_in_4bit=bnb_cfg["load_in_4bit"],
-            bnb_4bit_quant_type=bnb_cfg["bnb_4bit_quant_type"],
-            bnb_4bit_compute_dtype=torch.float16,
-            bnb_4bit_use_double_quant=bnb_cfg["bnb_4bit_use_double_quant"],
-        )
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            quantization_config=bnb_config,
-            device_map="auto",               # auto places layers across GPU/CPU
-            trust_remote_code=True,
-        )
-    else:
-        print(f" Loading model in standard precision (no quantization): {model_name}")
-        model = AutoModelForCausalLM.from_pretrained(
-            model_name,
-            device_map="auto",               # auto places layers across GPU/CPU
-            trust_remote_code=True,
-        )
-    model.config.use_cache = False       # disable KV cache during training
+def load_model(model_name, bnb_cfg, use_quantization=False):
+    print(f"Loading model: {model_name}")
+    model = AutoModelForCausalLM.from_pretrained(
+        model_name,
+        torch_dtype=torch.float32,
+        device_map=None,        # no device mapping on CPU
+        trust_remote_code=True,
+        low_cpu_mem_usage=True,
+    )
+    model.config.use_cache = False
     model.config.pretraining_tp = 1
     return model
 

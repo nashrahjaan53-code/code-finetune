@@ -11,3 +11,29 @@ Special tokens have been added in the vocabulary, make sure the associated word 
   - Disabling float16 precision (using float32)
 
  Loading model in standard precision (no quantization): Qwen/Qwen2.5-0.5B-Instruct
+Some parameters are on the meta device because they were offloaded to the cpu and disk.
+Applying LoRA adapters...
+C:\Users\malik\code-finetune\venv\Lib\site-packages\bitsandbytes\cextension.py:31: UserWarning: The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers, 8-bit multiplication, and GPU quantization are unavailable.
+  warn("The installed version of bitsandbytes was compiled without GPU support. "
+function 'cadam32bit_grad_fp32' not found
+trainable params: 8,650,752 || all params: 502,683,520 || trainable%: 1.7209141847339655
+ Loading processed dataset...
+Generating train split: 19020 examples [00:00, 74290.36 examples/s]
+Generating train split: 1002 examples [00:00, 31246.09 examples/s]
+Train: 19020 | Val: 1002
+Map: 100%|██████████| 19020/19020 [00:31<00:00, 603.05 examples/s] 
+Map: 100%|██████████| 1002/1002 [00:03<00:00, 276.85 examples/s]
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 148, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 125, in train
+    trainer = SFTTrainer(
+              ^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\trl\trainer\sft_trainer.py", line 322, in __init__
+    super().__init__(
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\trainer.py", line 367, in __init__
+    self.create_accelerator_and_postprocess()
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\trainer.py", line 4127, in create_accelerator_and_postprocess
+    self.accelerator = Accelerator(
+                       ^^^^^^^^^^^^
+TypeError: Accelerator.__init__() got an unexpected keyword argument 'dispatch_batches'
