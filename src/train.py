@@ -82,7 +82,7 @@ def train():
         logging_steps=t["logging_steps"],
         save_steps=t["save_steps"],
         eval_steps=t["eval_steps"],
-        eval_strategy="steps",
+        evaluation_strategy="steps",
         save_total_limit=2,
         load_best_model_at_end=True,
         report_to="wandb",

@@ -1,0 +1,12 @@
+Loading tokenizer: Qwen/Qwen2.5-0.5B-Instruct
+C:\Users\malik\code-finetune\venv\Lib\site-packages\huggingface_hub\file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading model: Qwen/Qwen2.5-0.5B-Instruct
+Applying LoRA adapters...
+C:\Users\malik\code-finetune\venv\Lib\site-packages\bitsandbytes\cextension.py:31: UserWarning: The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers, 8-bit multiplication, and GPU quantization are unavailable.
+  warn("The installed version of bitsandbytes was compiled without GPU support. "
+function 'cadam32bit_grad_fp32' not found
+trainable params: 1,081,344 || all params: 495,114,112 || trainable%: 0.21840298504761665
+Loading processed dataset...
+Train: 19020 | Val: 1002
