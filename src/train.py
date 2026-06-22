@@ -5,7 +5,7 @@ import wandb
 from dotenv import load_dotenv
 from datasets import load_dataset
 from transformers import AutoModelForCausalLM, AutoTokenizer, TrainingArguments
-from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer
 
 load_dotenv()
@@ -71,33 +71,33 @@ def train():
     t = cfg["training"]
 
     training_args = TrainingArguments(
-    output_dir=t["output_dir"],
-    num_train_epochs=t["num_train_epochs"],
-    per_device_train_batch_size=t["per_device_train_batch_size"],
-    gradient_accumulation_steps=t["gradient_accumulation_steps"],
-    learning_rate=t["learning_rate"],
-    warmup_ratio=t["warmup_ratio"],
-    lr_scheduler_type=t["lr_scheduler_type"],
-    fp16=False,
-    logging_steps=t["logging_steps"],
-    save_steps=t["save_steps"],
-    eval_steps=t["eval_steps"],
-    eval_strategy="steps",
-    save_total_limit=2,
-    load_best_model_at_end=True,
-    report_to="wandb",
-    use_cpu=True,
-)
+        output_dir=t["output_dir"],
+        num_train_epochs=t["num_train_epochs"],
+        per_device_train_batch_size=t["per_device_train_batch_size"],
+        gradient_accumulation_steps=t["gradient_accumulation_steps"],
+        learning_rate=t["learning_rate"],
+        warmup_ratio=t["warmup_ratio"],
+        lr_scheduler_type=t["lr_scheduler_type"],
+        fp16=False,
+        logging_steps=t["logging_steps"],
+        save_steps=t["save_steps"],
+        eval_steps=t["eval_steps"],
+        eval_strategy="steps",
+        save_total_limit=2,
+        load_best_model_at_end=True,
+        report_to="wandb",
+        use_cpu=True,
+    )
 
-   trainer = SFTTrainer(
-    model=model,
-    train_dataset=train_ds,
-    eval_dataset=val_ds,
-    tokenizer=tokenizer,
-    args=training_args,
-    dataset_text_field="text",
-    max_seq_length=t["max_seq_length"],
-)
+    trainer = SFTTrainer(
+        model=model,
+        train_dataset=train_ds,
+        eval_dataset=val_ds,
+        tokenizer=tokenizer,
+        args=training_args,
+        dataset_text_field="text",
+        max_seq_length=t["max_seq_length"],
+    )
 
     print("\nStarting training...\n")
     trainer.train()
