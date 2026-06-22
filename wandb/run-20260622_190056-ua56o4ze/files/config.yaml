@@ -1,0 +1,54 @@
+_wandb:
+    value:
+        cli_version: 0.27.2
+        e:
+            5gb5y2a2ye8zsgca6xlx417um9m116cb:
+                codePath: src\train.py
+                codePathLocal: src\train.py
+                cpu_count: 6
+                cpu_count_logical: 8
+                disk:
+                    /:
+                        total: "308302311424"
+                        used: "286952448000"
+                executable: C:\Users\malik\code-finetune\venv\Scripts\python.exe
+                git:
+                    commit: 0b69a8aba26ee1e1ff669e2dc44f61abd0e237d8
+                    remote: https://github.com/nashrahjaan53-code/code-finetune.git
+                host: lenovo
+                memory:
+                    total: "8301043712"
+                os: Windows-10-10.0.26200-SP0
+                program: C:\Users\malik\code-finetune\src\train.py
+                python: CPython 3.11.9
+                root: C:\Users\malik\code-finetune
+                startedAt: "2026-06-22T13:30:56.825214Z"
+                writerId: 5gb5y2a2ye8zsgca6xlx417um9m116cb
+        m: []
+        python_version: 3.11.9
+        t:
+            "1":
+                - 1
+                - 11
+                - 49
+                - 51
+                - 71
+                - 84
+                - 98
+            "2":
+                - 1
+                - 11
+                - 49
+                - 51
+                - 71
+                - 84
+                - 98
+            "3":
+                - 13
+            "4": 3.11.9
+            "5": 0.27.2
+            "6": 5.12.1
+            "8":
+                - 3
+            "12": 0.27.2
+            "13": windows-amd64

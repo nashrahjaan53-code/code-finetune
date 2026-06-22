@@ -1,0 +1,9 @@
+ Loading tokenizer: Qwen/Qwen2.5-0.5B-Instruct
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 135, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 78, in train
+    use_quant = cfg["bnb_config"]["load_in_4bit"] and has_cuda
+                ~~~^^^^^^^^^^^^^^
+KeyError: 'bnb_config'
