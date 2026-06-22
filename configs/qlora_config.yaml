@@ -22,15 +22,15 @@ lora_config:
 
 training:
   output_dir: "outputs/mistral-qlora"
-  num_train_epochs: 3
-  per_device_train_batch_size: 4
-  gradient_accumulation_steps: 4
+  num_train_epochs: 1
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 2
   learning_rate: 2e-4
-  max_seq_length: 512
+  max_seq_length: 256
   warmup_ratio: 0.03
   lr_scheduler_type: "cosine"
   logging_steps: 25
   save_steps: 100
   eval_steps: 100
-  fp16: true
+  fp16: false
   report_to: "wandb"
