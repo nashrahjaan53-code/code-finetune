@@ -1,0 +1,21 @@
+ Loading tokenizer: mistralai/Mistral-7B-v0.1
+C:\Users\malik\code-finetune\venv\Lib\site-packages\huggingface_hub\file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+ Loading model in 4-bit: mistralai/Mistral-7B-v0.1
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 130, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 83, in train
+    model       = load_model(model_name, cfg["bnb_config"])
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\src\train.py", line 39, in load_model
+    model = AutoModelForCausalLM.from_pretrained(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\models\auto\auto_factory.py", line 561, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\modeling_utils.py", line 3024, in from_pretrained
+    hf_quantizer.validate_environment(
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\quantizers\quantizer_bnb_4bit.py", line 62, in validate_environment
+    raise ImportError(
+ImportError: Using `bitsandbytes` 8-bit quantization requires Accelerate: `pip install accelerate` and the latest version of bitsandbytes: `pip install -i https://pypi.org/simple/ bitsandbytes`

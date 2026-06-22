@@ -25,7 +25,6 @@ def load_tokenizer(model_name):
     tokenizer.padding_side = "right"
     return tokenizer
 
-# ── Load Model in 4-bit ───────────────────────────────────────────────────────
 def load_model(model_name, bnb_cfg):
     print(f" Loading model in 4-bit: {model_name}")
     
@@ -46,7 +45,7 @@ def load_model(model_name, bnb_cfg):
     model.config.pretraining_tp = 1
     return model
 
-# ── Apply LoRA Adapters ───────────────────────────────────────────────────────
+
 def apply_lora(model, lora_cfg):
     print("Applying LoRA adapters...")
     
