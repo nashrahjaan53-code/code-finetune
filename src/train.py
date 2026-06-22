@@ -20,7 +20,7 @@ def load_config(path="configs/qlora_config.yaml"):
 
 def load_tokenizer(model_name):
     print(f" Loading tokenizer: {model_name}")
-    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, use_fast=False)
     tokenizer.pad_token = tokenizer.eos_token   # CodeLlama has no pad token
     tokenizer.padding_side = "right"
     return tokenizer

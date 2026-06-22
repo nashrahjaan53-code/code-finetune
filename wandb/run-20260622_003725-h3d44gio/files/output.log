@@ -1,0 +1,27 @@
+ Loading tokenizer: mistralai/Mistral-7B-v0.1
+C:\Users\malik\code-finetune\venv\Lib\site-packages\huggingface_hub\file_download.py:949: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 130, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 82, in train
+    tokenizer   = load_tokenizer(model_name)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\src\train.py", line 23, in load_tokenizer
+    tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\models\auto\tokenization_auto.py", line 825, in from_pretrained
+    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2048, in from_pretrained
+    return cls._from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\tokenization_utils_base.py", line 2287, in _from_pretrained
+    tokenizer = cls(*init_inputs, **init_kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\models\llama\tokenization_llama_fast.py", line 133, in __init__
+    super().__init__(
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\transformers\tokenization_utils_fast.py", line 111, in __init__
+    fast_tokenizer = TokenizerFast.from_file(fast_tokenizer_file)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Exception: data did not match any variant of untagged enum PyPreTokenizerTypeWrapper at line 40 column 3
