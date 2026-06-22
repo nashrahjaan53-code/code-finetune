@@ -2,4 +2,38 @@ Loading tokenizer: Qwen/Qwen2.5-0.5B-Instruct
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 Loading model: Qwen/Qwen2.5-0.5B-Instruct
 [transformers] `torch_dtype` is deprecated! Use `dtype` instead!
-Loading weights:   0%|▎                                                                                                      | 1/290 [00:38<3:05:08, 38.44s/it]
+Loading weights: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████| 290/290 [00:39<00:00,  7.34it/s]
+Applying LoRA adapters...
+C:\Users\malik\code-finetune\venv\Lib\site-packages\bitsandbytes\cextension.py:31: UserWarning: The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers, 8-bit multiplication, and GPU quantization are unavailable.
+  warn("The installed version of bitsandbytes was compiled without GPU support. "
+function 'cadam32bit_grad_fp32' not found
+trainable params: 8,650,752 || all params: 502,683,520 || trainable%: 1.7209141847339655
+Loading processed dataset...
+Traceback (most recent call last):
+  File "C:\Users\malik\code-finetune\src\train.py", line 113, in <module>
+    train()
+  File "C:\Users\malik\code-finetune\src\train.py", line 69, in train
+    train_ds, val_ds = load_data()
+                       ^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\src\train.py", line 56, in load_data
+    train = load_dataset("json", data_files="data/processed/train.jsonl", split="train")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\load.py", line 2556, in load_dataset
+    builder_instance = load_dataset_builder(
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\load.py", line 2228, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\load.py", line 1768, in dataset_module_factory
+    ).get_module()
+      ^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\load.py", line 1134, in get_module
+    data_files = DataFilesDict.from_patterns(
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\data_files.py", line 700, in from_patterns
+    DataFilesList.from_patterns(
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\data_files.py", line 605, in from_patterns
+    resolve_pattern(
+  File "C:\Users\malik\code-finetune\venv\Lib\site-packages\datasets\data_files.py", line 393, in resolve_pattern
+    raise FileNotFoundError(error_msg)
+FileNotFoundError: Unable to find 'C:/Users/malik/code-finetune\data/processed/train.json'

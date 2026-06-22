@@ -1,14 +1,7 @@
 model_name: "Qwen/Qwen2.5-0.5B-Instruct"
 
-##bnb_config:
-  ##load_in_4bit: true
-  ##bnb_4bit_quant_type: "nf4"
-  ##bnb_4bit_compute_dtype: "float16"
-  ##bnb_4bit_use_double_quant: true
-
-
 lora_config:
-  r: 64
+  r: 16
   lora_alpha: 16
   lora_dropout: 0.1
   bias: "none"
@@ -16,12 +9,9 @@ lora_config:
   target_modules:
     - "q_proj"
     - "v_proj"
-    - "k_proj"
-    - "o_proj"
-
 
 training:
-  output_dir: "outputs/mistral-qlora"
+  output_dir: "outputs/qwen-lora"
   num_train_epochs: 1
   per_device_train_batch_size: 1
   gradient_accumulation_steps: 2
@@ -29,8 +19,6 @@ training:
   max_seq_length: 256
   warmup_ratio: 0.03
   lr_scheduler_type: "cosine"
-  logging_steps: 25
+  logging_steps: 10
   save_steps: 100
   eval_steps: 100
-  fp16: false
-  report_to: "wandb"
