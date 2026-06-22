@@ -44,12 +44,12 @@ def prepare_and_save(output_dir="data/processed"):
     train_ds = split["train"]
     val_ds   = split["test"]
     
-    print(f"📊 Train: {len(train_ds)} | Val: {len(val_ds)}")
+    print(f" Train: {len(train_ds)} | Val: {len(val_ds)}")
     
     # Save as JSON
     train_ds.to_json(f"{output_dir}/train.json")
     val_ds.to_json(f"{output_dir}/val.json")
-    print(f"💾 Saved to {output_dir}/")
+    print(f" Saved to {output_dir}/")
     
     # Preview 1 sample
     print("\n── Sample Preview ──────────────────────────")
