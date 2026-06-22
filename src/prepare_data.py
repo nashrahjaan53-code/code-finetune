@@ -48,7 +48,7 @@ def prepare_and_save(output_dir="data/processed"):
     
  
     train_ds.to_json(f"{output_dir}/train.jsonl")
-    val_ds.to_json(f"{output_dir}/val.json")
+    val_ds.to_json(f"{output_dir}/val.jsonl")
     print(f" Saved to {output_dir}/")
     
  
